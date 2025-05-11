@@ -47,10 +47,8 @@ npm run start:dev
 #### For production:
 
 ```
-npm run start:dev
+npm run start:build
 ```
-
-### Running the Application
 
 ```
 npm run build
@@ -72,6 +70,48 @@ npm run lint
 
 #### To format the code, run:
 
-   ```
-  npm run format
-  ```
+```
+npm run format
+```
+
+### Implemented endpoint api/users:
+
+```
+npm run start:dev
+```
+
+or
+
+```
+npm run start:prod
+```
+
+#### GET api/users is used to get all persons
+
+```
+curl -X GET http://localhost:4000/api/users
+```
+
+#### GET api/users/{userId}
+
+```
+curl -X GET http://localhost:4000/api/users/{:id}
+```
+
+#### POST api/users is used to create record about new user and store it in database
+
+```
+curl -X POST http://localhost:4000/api/users -d '{"username": "test", "age": 25, "hobbies": []}'
+```
+
+#### PUT api/users/{userId} is used to update existing user
+
+```
+curl -X PUT http://localhost:4000/api/{:id} -d '{"username": "test2"}'
+```
+
+#### DELETE api/users/{userId} is used to delete existing user from database
+
+```
+curl -X DELETE http://localhost:4000/api/{:id}
+```
