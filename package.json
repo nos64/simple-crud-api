@@ -1,13 +1,18 @@
 {
   "name": "simple-crud-api",
   "version": "1.0.0",
-  "description": "Simple CRUD API",
-  "main": "index.js",
+  "description": "Simple CRUD API with Node.js and Typescript",
+    "engines": {
+    "node": ">=22.14.0"
+  },
   "scripts": {
+    "start:dev": "cross-env NODE_ENV=development ts-node-dev src/server.ts",
+    "start:prod": "cross-env NODE_ENV=production npm run build && node dist/server.js",
+    "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint \"src/**/*.ts\" --fix"
   },
-  "author": "Mikhail Nosov",
+  "author": "nos64",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.5.0",
