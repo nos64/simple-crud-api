@@ -11,4 +11,15 @@ server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
+const cleanup = () => {
+  console.log('Server closed');
+
+  server.close(() => {
+    process.exit(0);
+  });
+};
+
+process.on('SIGTERM', cleanup);
+process.on('SIGINT', cleanup);
+
 export { server };
