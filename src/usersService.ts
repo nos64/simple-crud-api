@@ -1,21 +1,21 @@
 import { v4 as uuidv4 } from 'uuid';
 
+import { getDB, updateDB } from './sharedDB';
+
 import { type User } from 'user.types';
 
-const users = new Map<string, User>();
-
 export const getUsers = async (): Promise<User[]> => {
-  return Array.from(users.values());
+  return Array.from(getDB().values());
 };
 
 export const getUser = async (id: string): Promise<User | undefined> => {
-  return users.get(id);
+  return getDB().get(id);
 };
 
 export const createUser = async (userData: Omit<User, 'id'>): Promise<User> => {
   const id = uuidv4();
-  const newUser: User = { id, ...userData };
-  users.set(id, newUser);
+  const newUser = { id, ...userData };
+  updateDB(id, newUser);
 
   return newUser;
 };
@@ -24,14 +24,20 @@ export const updateUser = async (
   id: string,
   userData: Partial<User>,
 ): Promise<User | undefined> => {
-  const user = users.get(id);
+  const user = getDB().get(id);
   if (!user) return undefined;
 
   const updatedUser = { ...user, ...userData, id };
-  users.set(id, updatedUser);
+  updateDB(id, updatedUser);
 
   return updatedUser;
 };
 
-export const deleteUser = async (id: string): Promise<boolean> =>
-  users.delete(id);
+export const deleteUser = async (id: string): Promise<boolean> => {
+  const exists = getDB().has(id);
+  if (exists) {
+    updateDB(id, null);
+  }
+
+  return exists;
+};
