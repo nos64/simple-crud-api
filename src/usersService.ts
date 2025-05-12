@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { getDB, updateDB } from './sharedDB';
 
-import { type User } from 'user.types';
+import { type User } from './user.types';
 
 export const getUsers = async (): Promise<User[]> => {
   return Array.from(getDB().values());
