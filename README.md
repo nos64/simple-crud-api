@@ -115,3 +115,9 @@ curl -X PUT http://localhost:4000/api/{:id} -d '{"username": "test2"}'
 ```
 curl -X DELETE http://localhost:4000/api/{:id}
 ```
+
+### Implemented horizontal scaling for application with a load balancer that distributes requests across them (using Round-robin algorithm)
+
+```
+npm run start:multi
+```
